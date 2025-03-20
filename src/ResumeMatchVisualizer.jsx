@@ -4,6 +4,24 @@ const ResumeMatchVisualizer = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [darkMode, setDarkMode] = useState(false);
   
+  // Add responsive sizing based on viewport width
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  
+  // Calculate sizes based on screen width
+  const toggleWidth = windowWidth <= 480 ? 44 : windowWidth <= 768 ? 50 : 60;
+  const sliderSize = windowWidth <= 480 ? 18 : windowWidth <= 768 ? 22 : 26;
+  const sliderOffset = 4; // Padding from edge
+  
+  // Add window resize listener
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
   // Apple-inspired color palette
   const lightColors = {
     background: '#f5f5f7',
@@ -60,6 +78,11 @@ const ResumeMatchVisualizer = () => {
         }
       }
 
+      /* Make just the toggle slider transition smooth */
+      .toggle-slider {
+        transition: left 0.3s ease;
+      }
+
       .container {
         max-width: 1000px;
         margin: 0 auto;
@@ -79,6 +102,11 @@ const ResumeMatchVisualizer = () => {
         align-items: center;
       }
       
+      .controls-container {
+        display: flex;
+        align-items: center;
+      }
+      
       .card {
         background-color: ${colors.light};
         border-radius: 12px;
@@ -90,6 +118,7 @@ const ResumeMatchVisualizer = () => {
       .tabs {
         display: flex;
         border-bottom: 1px solid rgba(134, 134, 139, 0.2);
+        overflow-x: auto;
       }
       
       .tab-button {
@@ -100,6 +129,7 @@ const ResumeMatchVisualizer = () => {
         background: none;
         cursor: pointer;
         transition: all 0.3s ease;
+        white-space: nowrap;
       }
       
       .tab-content {
@@ -159,22 +189,18 @@ const ResumeMatchVisualizer = () => {
       }
       
       .toggle-switch {
-        width: 58px;
-        height: 30px;
-        border-radius: 15px;
+        border: none;
         position: relative;
         cursor: pointer;
-        transition: background-color 0.3s;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) inset;
+        overflow: hidden;
       }
       
       .toggle-slider {
         position: absolute;
-        top: 2px;
-        width: 20px;
-        height: 20px;
+        top: 50%;
+        transform: translateY(-50%);
         border-radius: 50%;
-        transition: transform 0.3s, background-color 0.3s;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       }
       
@@ -258,6 +284,70 @@ const ResumeMatchVisualizer = () => {
         text-align: center;
         font-size: 14px;
         margin-top: 12px;
+      }
+      
+      /* Media queries for responsiveness */
+      @media (max-width: 768px) {
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        
+        .title-container {
+          margin-bottom: 16px;
+          width: 100%;
+        }
+        
+        .controls-container {
+          justify-content: space-between;
+          width: 100%;
+        }
+        
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .tab-button {
+          padding: 12px 16px;
+          font-size: 13px;
+        }
+        
+        .tab-content {
+          padding: 16px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .tab-button {
+          padding: 10px 12px;
+          font-size: 12px;
+        }
+        
+        .match-bar {
+          width: 60px;
+        }
+        
+        .requirement-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        
+        .match-percentage {
+          margin-top: 8px;
+        }
+        
+        .tab-content {
+          padding: 12px;
+        }
+        
+        .animated-logo {
+          width: 80px;
+          height: 80px;
+        }
+        
+        .logo-percentage {
+          font-size: 18px;
+        }
       }
     `;
     document.head.appendChild(style);
@@ -406,7 +496,11 @@ const ResumeMatchVisualizer = () => {
   };
   
   return (
-    <div style={{ backgroundColor: colors.background, minHeight: '100vh', color: colors.dark }}>
+    <div style={{ 
+      backgroundColor: colors.background, 
+      minHeight: '100vh', 
+      color: colors.dark,
+    }}>
       <div className="container">
         <div className="header">
           <div className="title-container">
@@ -416,20 +510,32 @@ const ResumeMatchVisualizer = () => {
             <h1 style={{ fontSize: '24px', fontWeight: 'bold', marginLeft: '10px', color: colors.dark }}>Resume Match Analysis</h1>
           </div>
           
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="controls-container">
             <button 
               onClick={() => setDarkMode(!darkMode)}
               className="toggle-switch"
-              style={{ backgroundColor: darkMode ? colors.primary : colors.secondary }}
+              style={{ 
+                backgroundColor: darkMode ? colors.primary : colors.secondary,
+                width: `${toggleWidth}px`,
+                height: `${toggleWidth * 0.5}px`, 
+                borderRadius: `${toggleWidth * 0.25}px`
+              }}
             >
               <div 
                 className="toggle-slider"
                 style={{ 
                   backgroundColor: colors.light,
-                  transform: darkMode ? 'translateX(25px)' : 'translateX(-1px)'
+                  width: `${sliderSize}px`,
+                  height: `${sliderSize}px`,
+                  position: 'absolute',
+                  top: '50%',
+                  left: darkMode ? `${toggleWidth - sliderSize - sliderOffset}px` : `${sliderOffset}px`,
+                  transform: 'translateY(-50%)'
                 }}
               ></div>
-              <span style={{ position: 'absolute', width: '3px', height: '3px', overflow: 'hidden', clip: 'rect(0,0,0,0)' }}>Toggle Dark Mode</span>
+              <span style={{ position: 'absolute', width: '1px', height: '1px', overflow: 'hidden', clip: 'rect(0,0,0,0)' }}>
+                Toggle Dark Mode
+              </span>
             </button>
             
             <div style={{ 
