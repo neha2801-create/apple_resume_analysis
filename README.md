@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# Resume Match Visualizer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React application with Apple-inspired design that visualizes resume compatibility with job descriptions.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Match Analysis**: Overall match score, qualification breakdown, and skills assessment
+- **Apple Design**: Clean interface with Apple color palette and animated logo
+- **Dark Mode**: Toggle between light and dark themes
+- **Interactive UI**: Tabbed navigation for different analysis views
 
-### `npm start`
+## Live Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Visit the live application: [Resume Match Visualizer](https://neha2801-create.github.io/apple_resume_analysis)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+```bash
+# Clone the repository
+git clone https://github.com/neha2801-create/apple_resume_analysis.git
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Install dependencies
+cd apple_resume_analysis
+npm install
 
-### `npm run build`
+# Run development server
+npm start
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Build for production
+npm run build
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Deployment
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This project is deployed using GitHub Pages. To deploy updates:
 
-### `npm run eject`
+1. Install the GitHub Pages package if not already installed:
+   ```bash
+   npm install --save gh-pages
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Add these lines to your `package.json`:
+   ```json
+   "homepage": "https://neha2801-create.github.io/apple_resume_analysis",
+   "scripts": {
+     // other scripts...
+     "predeploy": "npm run build",
+     "deploy": "gh-pages -d build"
+   }
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Deploy the application:
+   ```bash
+   npm run deploy
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Customization
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Edit the following variables in `ResumeMatchVisualizer.js`:
+- `requirements`: Job qualification details and match scores
+- `skills`: Skills assessment data
+- `strengths`: Key resume strengths
+- `overallMatch`: Overall match percentage
 
-## Learn More
+## How It Works
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The app compares resume content against job requirements, calculating match percentages for each qualification. The animated Apple logo and progress bars provide visual representation of compatibility.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Technologies
 
-### Code Splitting
+- React
+- JavaScript (ES6+)
+- CSS animations
+- Dynamic theme switching
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
