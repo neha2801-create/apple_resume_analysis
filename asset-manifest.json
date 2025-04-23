@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/apple_resume_analysis/static/css/main.e6c13ad2.css",
-    "main.js": "/apple_resume_analysis/static/js/main.eb4ed35a.js",
+    "main.js": "/apple_resume_analysis/static/js/main.dbb5d7ad.js",
     "static/js/453.fa7abe88.chunk.js": "/apple_resume_analysis/static/js/453.fa7abe88.chunk.js",
     "index.html": "/apple_resume_analysis/index.html",
     "main.e6c13ad2.css.map": "/apple_resume_analysis/static/css/main.e6c13ad2.css.map",
-    "main.eb4ed35a.js.map": "/apple_resume_analysis/static/js/main.eb4ed35a.js.map",
+    "main.dbb5d7ad.js.map": "/apple_resume_analysis/static/js/main.dbb5d7ad.js.map",
     "453.fa7abe88.chunk.js.map": "/apple_resume_analysis/static/js/453.fa7abe88.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.eb4ed35a.js"
+    "static/js/main.dbb5d7ad.js"
   ]
 }
